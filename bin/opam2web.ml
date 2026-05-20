@@ -138,7 +138,8 @@ let make_website user_options universe statistics ds =
   let package_index =
     to_html ~active:"name" ~compare_pkg:O2wPackage.compare_alphanum in
   let opam_title =
-    Html.img (Uri.make ~path:("/ext/img/favicon.png") ()) ++
+    Html.img (Uri.canonicalize @@ Uri.with_path (user_options.root_uri) 
+      ((Uri.path user_options.root_uri ) ^ "/ext/img/favicon.png")) ++
     Html.span ~cls:"opam-title" (Html.string " opam")
   in
   O2wTemplate.generate
